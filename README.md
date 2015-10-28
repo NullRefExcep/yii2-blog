@@ -1,6 +1,7 @@
 Blog module for Yii2
 ====================
-Blog module for Yii2
+[![Latest Stable Version](https://poser.pugx.org/nullref/yii2-blog/v/stable)](https://packagist.org/packages/nullref/yii2-blog) [![Total Downloads](https://poser.pugx.org/nullref/yii2-blog/downloads)](https://packagist.org/packages/nullref/yii2-blog) [![Latest Unstable Version](https://poser.pugx.org/nullref/yii2-blog/v/unstable)](https://packagist.org/packages/nullref/yii2-blog) [![License](https://poser.pugx.org/nullref/yii2-blog/license)](https://packagist.org/packages/nullref/yii2-blog)
+
 
 Installation
 ------------
