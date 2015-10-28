@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\blog\models\BlogPostSearch */
+/* @var $model \nullref\blog\models\BlogPostSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -24,12 +24,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'slug') ?>
 
     <?= $form->field($model, 'status') ?>
-
-    <?php // echo $form->field($model, 'createdAt') ?>
-
-    <?php // echo $form->field($model, 'updatedAt') ?>
-
-    <?php // echo $form->field($model, 'data') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

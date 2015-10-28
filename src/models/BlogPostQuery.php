@@ -1,14 +1,14 @@
 <?php
 
 namespace nullref\blog\models;
-use nullref\blog\models\BlogPost;
+use yii\db\ActiveQuery;
 
 /**
  * This is the ActiveQuery class for [[BlogPost]].
  *
  * @see BlogPost
  */
-class BlogPostQuery extends \yii\db\ActiveQuery
+class BlogPostQuery extends ActiveQuery
 {
     public function published()
     {

@@ -4,6 +4,7 @@ namespace nullref\blog\models;
 
 use yii\behaviors\TimestampBehavior;
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "blog_post".
@@ -17,9 +18,8 @@ use Yii;
  * @property integer $updatedAt
  * @property string $data
  */
-class BlogPost extends \yii\db\ActiveRecord
+class BlogPost extends ActiveRecord
 {
-
     const STATUS_DRAFT = 0;
     const STATUS_PUBLISHED = 1;
     const STATUS_DELETED = 2;

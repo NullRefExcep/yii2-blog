@@ -1,18 +1,18 @@
 <?php
 
-namespace app\modules\blog\controllers;
+namespace nullref\blog\controllers;
 
 use Yii;
-use app\modules\blog\models\BlogPost;
-use app\modules\blog\models\BlogPostSearch;
-use yii\web\Controller;
+use nullref\blog\models\BlogPost;
+use nullref\blog\models\BlogPostSearch;
+use nullref\product\controllers\AdminController as BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * AdminController implements the CRUD actions for BlogPost model.
  */
-class AdminController extends Controller
+class AdminController extends BaseController
 {
     public function behaviors()
     {
@@ -32,7 +32,7 @@ class AdminController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new BlogPostSearch();
+        $searchModel = Yii::createObject(BlogPostSearch::className());
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -60,7 +60,7 @@ class AdminController extends Controller
      */
     public function actionCreate()
     {
-        $model = new BlogPost();
+        $model = Yii::createObject(BlogPost::className());
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

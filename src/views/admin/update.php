@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\blog\models\BlogPost */
+/* @var $model \nullref\blog\models\BlogPost */
 
 $this->title = Yii::t('app', 'Update {modelClass}: ', [
     'modelClass' => 'Blog Post',
@@ -14,7 +14,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="blog-post-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"><?= Html::encode($this->title) ?></h1>
+        </div>
+    </div>
 
     <?= $this->render('_form', [
         'model' => $model,
