@@ -4,21 +4,21 @@ namespace nullref\blog\models;
 use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[BlogPost]].
+ * This is the ActiveQuery class for [[Post]].
  *
- * @see BlogPost
+ * @see Post
  */
-class BlogPostQuery extends ActiveQuery
+class PostQuery extends ActiveQuery
 {
     public function published()
     {
-        $this->andWhere('status=:status', [':status' => BlogPost::STATUS_PUBLISHED]);
+        $this->andWhere('status=:status', [':status' => Post::STATUS_PUBLISHED]);
         return $this;
     }
 
     /**
      * @inheritdoc
-     * @return BlogPost[]|array
+     * @return Post[]|array
      */
     public function all($db = null)
     {
@@ -27,7 +27,7 @@ class BlogPostQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return BlogPost|array|null
+     * @return Post|array|null
      */
     public function one($db = null)
     {

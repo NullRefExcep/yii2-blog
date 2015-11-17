@@ -8,9 +8,9 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * BlogPostSearch represents the model behind the search form about `app\modules\blog\models\BlogPost`.
+ * PostSearch represents the model behind the search form about `app\modules\blog\models\Post`.
  */
-class BlogPostSearch extends BlogPost
+class PostSearch extends Post
 {
     /**
      * @inheritdoc
@@ -41,7 +41,7 @@ class BlogPostSearch extends BlogPost
      */
     public function search($params)
     {
-        $query = BlogPost::find();
+        $query = Post::find();
 
         // add conditions that should always apply here
 

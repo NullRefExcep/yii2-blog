@@ -12,7 +12,7 @@ use Yii;
  */
 class Module extends BaseModule implements IAdminModule
 {
-    public $postModel = 'nullref\blog\models\BlogPost';
+    public $postModel = 'nullref\blog\models\Post';
 
     public static function getAdminMenu()
     {

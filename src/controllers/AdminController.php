@@ -3,14 +3,14 @@
 namespace nullref\blog\controllers;
 
 use Yii;
-use nullref\blog\models\BlogPost;
-use nullref\blog\models\BlogPostSearch;
+use nullref\blog\models\Post;
+use nullref\blog\models\PostSearch;
 use nullref\product\controllers\AdminController as BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AdminController implements the CRUD actions for BlogPost model.
+ * AdminController implements the CRUD actions for Post model.
  */
 class AdminController extends BaseController
 {
@@ -27,12 +27,12 @@ class AdminController extends BaseController
     }
 
     /**
-     * Lists all BlogPost models.
+     * Lists all Post models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = Yii::createObject(BlogPostSearch::className());
+        $searchModel = Yii::createObject(PostSearch::className());
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class AdminController extends BaseController
     }
 
     /**
-     * Displays a single BlogPost model.
+     * Displays a single Post model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class AdminController extends BaseController
     }
 
     /**
-     * Creates a new BlogPost model.
+     * Creates a new Post model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = Yii::createObject(BlogPost::className());
+        $model = Yii::createObject(Post::className());
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class AdminController extends BaseController
     }
 
     /**
-     * Updates an existing BlogPost model.
+     * Updates an existing Post model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class AdminController extends BaseController
     }
 
     /**
-     * Deletes an existing BlogPost model.
+     * Deletes an existing Post model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class AdminController extends BaseController
     }
 
     /**
-     * Finds the BlogPost model based on its primary key value.
+     * Finds the Post model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return BlogPost the loaded model
+     * @return Post the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = BlogPost::findOne($id)) !== null) {
+        if (($model = Post::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

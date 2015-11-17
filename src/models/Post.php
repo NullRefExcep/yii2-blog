@@ -18,7 +18,7 @@ use yii\db\ActiveRecord;
  * @property integer $updatedAt
  * @property string $data
  */
-class BlogPost extends ActiveRecord
+class Post extends ActiveRecord
 {
     const STATUS_DRAFT = 0;
     const STATUS_PUBLISHED = 1;
