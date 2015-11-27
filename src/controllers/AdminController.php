@@ -5,7 +5,7 @@ namespace nullref\blog\controllers;
 use Yii;
 use nullref\blog\models\Post;
 use nullref\blog\models\PostSearch;
-use nullref\product\controllers\AdminController as BaseController;
+use nullref\admin\components\AdminController as BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
