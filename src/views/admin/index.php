@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel \nullref\blog\models\PostSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Blog Posts');
+$this->title = Yii::t('blog', 'Blog Posts');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="blog-post-index">
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Blog Post'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('blog', 'Create Blog Post'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

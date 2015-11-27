@@ -21,5 +21,8 @@
         "psr-4": {
             "nullref\\blog\\": "src/"
         }
+    },
+    "extra": {
+        "bootstrap":"nullref\\blog\\Bootstrap"
     }
 }
