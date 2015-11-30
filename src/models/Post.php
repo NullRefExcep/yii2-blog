@@ -85,7 +85,8 @@ class Post extends ActiveRecord
 
     public static function find()
     {
-        return Yii::createObject(PostQuery::className(), [get_called_class()]);
+        $definition = Yii::$container->getDefinitions()[self::className()];
+        return Yii::createObject(PostQuery::className(), [$definition['class']]);
     }
 
     /**
