@@ -1,8 +1,9 @@
 <?php
 
+use mihaildev\ckeditor\CKEditor;
+use nullref\blog\models\Post;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use nullref\blog\models\Post;
 
 /* @var $this yii\web\View */
 /* @var $model \nullref\blog\models\Post */
@@ -17,7 +18,13 @@ use nullref\blog\models\Post;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'short_text')->widget(CKEditor::className(), [
+        'editorOptions' => [
+            'preset' => 'basic',
+        ]
+    ]) ?>
+
+    <?= $form->field($model, 'text')->widget(CKEditor::className()) ?>
 
     <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
 

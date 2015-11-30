@@ -25,9 +25,9 @@ return [
     'Created At' => '',
     'Data' => '',
     'Delete' => '',
-    'Deleted' => '',
     'Draft' => '',
     'ID' => '',
+    'N/A' => '',
     'Published' => '',
     'Reset' => '',
     'Search' => '',
@@ -36,6 +36,6 @@ return [
     'Text' => '',
     'Title' => '',
     'Update' => '',
-    'Update {modelClass}: ' => '',
+    'Update Blog Post:' => '',
     'Updated At' => '',
 ];

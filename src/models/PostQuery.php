@@ -1,6 +1,8 @@
 <?php
 
 namespace nullref\blog\models;
+
+use nullref\blog\components\BlogStatusList;
 use yii\db\ActiveQuery;
 
 /**
@@ -10,9 +12,24 @@ use yii\db\ActiveQuery;
  */
 class PostQuery extends ActiveQuery
 {
+    /**
+     * Select only published posts
+     * @return $this
+     */
     public function published()
     {
-        $this->andWhere('status=:status', [':status' => Post::STATUS_PUBLISHED]);
+        $this->andWhere('status=:status', [':status' => BlogStatusList::STATUS_PUBLISHED]);
+        return $this;
+    }
+
+    /**
+     * Select post by slug
+     * @param $slug
+     * @return $this
+     */
+    public function bySlug($slug)
+    {
+        $this->andFilterWhere(['slug' => $slug]);
         return $this;
     }
 

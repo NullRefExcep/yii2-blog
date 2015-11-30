@@ -17,6 +17,9 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'ID' => '',
+    'N/A' => 'Не указано',
+    'Update Blog Post:' => 'Редактирование записи: ',
     'Are you sure you want to delete this item?' => 'Вы уверенны что хотите удалить эту запись?',
     'Blog' => 'Блог',
     'Blog Posts' => 'Записи',
@@ -25,9 +28,7 @@ return [
     'Created At' => 'Создано',
     'Data' => 'Даные',
     'Delete' => 'Удалить',
-    'Deleted' => 'Удалено',
     'Draft' => 'Черновик',
-    'ID' => '',
     'Published' => 'Опубликовано',
     'Reset' => 'Сброк',
     'Search' => 'Поиск',
@@ -36,6 +37,5 @@ return [
     'Text' => 'Текст',
     'Title' => 'Заголовок',
     'Update' => 'Редактировать',
-    'Update {modelClass}: ' => 'Редактировать {modelClass}: ',
     'Updated At' => 'Редактировано',
 ];

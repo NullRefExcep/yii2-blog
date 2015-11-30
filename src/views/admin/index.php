@@ -1,7 +1,8 @@
 <?php
 
-use yii\helpers\Html;
+use nullref\blog\models\Post;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel \nullref\blog\models\PostSearch */
@@ -30,14 +31,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'title',
-            'text:ntext',
             'slug',
-            'status',
-            // 'createdAt',
-            // 'updatedAt',
-            // 'data:ntext',
+            [
+                'filter' => Post::getStatuses(),
+                'attribute' => 'status',
+                'value' => 'statusTitle',
+            ],
+            'created_at:datetime',
+            'updated_at:datetime',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

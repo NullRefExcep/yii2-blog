@@ -14,6 +14,8 @@ class Module extends BaseModule implements IAdminModule
 {
     public $postModel = 'nullref\blog\models\Post';
 
+    public $classMap = [];
+
     public static function getAdminMenu()
     {
         return [

@@ -2,8 +2,10 @@
 
 namespace nullref\blog\models;
 
-use yii\behaviors\TimestampBehavior;
+use nullref\blog\components\BlogStatusList;
 use Yii;
+use yii\behaviors\SluggableBehavior;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
 /**
@@ -12,18 +14,15 @@ use yii\db\ActiveRecord;
  * @property integer $id
  * @property string $title
  * @property string $text
+ * @property string $short_text
  * @property string $slug
  * @property integer $status
- * @property integer $createdAt
- * @property integer $updatedAt
+ * @property integer $created_at
+ * @property integer $updated_at
  * @property string $data
  */
 class Post extends ActiveRecord
 {
-    const STATUS_DRAFT = 0;
-    const STATUS_PUBLISHED = 1;
-    const STATUS_DELETED = 2;
-
     /**
      * @inheritdoc
      */
@@ -38,8 +37,8 @@ class Post extends ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'text', 'status'], 'required'],
-            [['text', 'data'], 'string'],
+            [['title', 'text', 'status', 'short_text'], 'required'],
+            [['text', 'data', 'short_text'], 'string'],
             [['status'], 'integer'],
             [['title', 'slug'], 'string', 'max' => 255],
         ];
@@ -52,11 +51,17 @@ class Post extends ActiveRecord
      */
     public static function getStatuses()
     {
-        return [
-            self::STATUS_DRAFT => Yii::t('blog', 'Draft'),
-            self::STATUS_DELETED => Yii::t('blog', 'Deleted'),
-            self::STATUS_PUBLISHED => Yii::t('blog', 'Published')
-        ];
+        return Yii::$container->get(BlogStatusList::className())->getList();
+    }
+
+    /**
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function getStatusTitle()
+    {
+        $list = Yii::$container->get(BlogStatusList::className())->getList();
+        return isset($list[$this->status]) ? $list[$this->status] : Yii::t('blog', 'N/A');
     }
 
     /**
@@ -67,10 +72,20 @@ class Post extends ActiveRecord
         return array_merge(parent::behaviors(), [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
-                'updatedAtAttribute' => 'updatedAt',
-                'createdAtAttribute' => 'createdAt'
-            ]
+                'updatedAtAttribute' => 'updated_at',
+                'createdAtAttribute' => 'created_at'
+            ],
+            'slug' => [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'title',
+                'ensureUnique' => true,
+            ],
         ]);
+    }
+
+    public static function find()
+    {
+        return Yii::createObject(PostQuery::className(), [get_called_class()]);
     }
 
     /**
@@ -84,8 +99,8 @@ class Post extends ActiveRecord
             'text' => Yii::t('blog', 'Text'),
             'slug' => Yii::t('blog', 'Slug'),
             'status' => Yii::t('blog', 'Status'),
-            'createdAt' => Yii::t('blog', 'Created At'),
-            'updatedAt' => Yii::t('blog', 'Updated At'),
+            'created_at' => Yii::t('blog', 'Created At'),
+            'updated_at' => Yii::t('blog', 'Updated At'),
             'data' => Yii::t('blog', 'Data'),
         ];
     }
