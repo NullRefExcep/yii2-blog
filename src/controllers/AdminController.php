@@ -2,17 +2,18 @@
 
 namespace nullref\blog\controllers;
 
-use nullref\admin\components\AdminController as BaseController;
 use nullref\blog\models\Post;
 use nullref\blog\models\PostSearch;
+use nullref\core\interfaces\IAdminController;
 use Yii;
 use yii\filters\VerbFilter;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
  * AdminController implements the CRUD actions for Post model.
  */
-class AdminController extends BaseController
+class AdminController extends Controller implements IAdminController
 {
     public function behaviors()
     {

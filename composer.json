@@ -15,7 +15,8 @@
         "yiisoft/yii2": "*",
         "nullref/yii2-useful": "dev-master",
         "nullref/yii2-core": "dev-master",
-        "nullref/yii2-admin": "dev-master"
+        "mihaildev/yii2-ckeditor": "*",
+        "mihaildev/yii2-elfinder": "*"
     },
     "autoload": {
         "psr-4": {
