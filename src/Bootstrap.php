@@ -3,11 +3,11 @@
 namespace nullref\blog;
 
 use nullref\blog\components\BlogStatusList;
-use nullref\blog\models\Post;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\i18n\PhpMessageSource;
 use yii\web\Application as WebApplication;
+use yii\web\GroupUrlRule;
 
 class Bootstrap implements BootstrapInterface
 {
@@ -24,8 +24,8 @@ class Bootstrap implements BootstrapInterface
         if ($app->hasModule('blog') && ($module = $app->getModule('blog')) instanceof Module) {
             $classMap = array_merge($this->classMap, $module->classMap);
             Yii::$container->setSingleton(BlogStatusList::className(), $classMap['BlogStatusList']);
-            foreach (['PostQuery','Post'] as $item) {
-                $className = '\nullref\blog\models\\'.$item;
+            foreach (['PostQuery', 'Post'] as $item) {
+                $className = '\nullref\blog\models\\' . $item;
                 $postClass = $className::className();
                 $definition = $classMap[$item];
                 Yii::$container->set($postClass, $definition);
@@ -38,6 +38,13 @@ class Bootstrap implements BootstrapInterface
                     'basePath' => '@nullref/blog/messages',
                 ];
             }
+
+            $configUrlRule = [
+                'prefix' => $module->urlPrefix,
+                'rules' => $module->urlRules,
+            ];
+
+            $app->urlManager->addRules([new GroupUrlRule($configUrlRule)], false);
         }
     }
 }

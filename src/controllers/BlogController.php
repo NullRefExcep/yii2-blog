@@ -8,21 +8,6 @@ use yii\web\Controller;
 
 class BlogController extends Controller
 {
-    public $singleView = 'view';
-    public $listView = 'index';
-
-    public function actionView($slug)
-    {
-        /** @var PostSearch $searchModel */
-        $searchModel = Yii::createObject(PostSearch::className());
-        $dataProvider = $searchModel->findBySlug($slug);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
     public function actionIndex()
     {
         /** @var PostSearch $searchModel */
@@ -32,6 +17,17 @@ class BlogController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionView($slug)
+    {
+        /** @var PostSearch $searchModel */
+        $searchModel = Yii::createObject(PostSearch::className());
+        $model = $searchModel->findBySlug($slug);
+
+        return $this->render('view', [
+            'model' => $model,
         ]);
     }
 }
