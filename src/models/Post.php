@@ -97,6 +97,7 @@ class Post extends ActiveRecord
         return [
             'id' => Yii::t('blog', 'ID'),
             'title' => Yii::t('blog', 'Title'),
+            'short_text' => Yii::t('blog', 'Short Text'),
             'text' => Yii::t('blog', 'Text'),
             'slug' => Yii::t('blog', 'Slug'),
             'status' => Yii::t('blog', 'Status'),
