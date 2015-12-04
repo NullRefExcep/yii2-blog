@@ -13,6 +13,7 @@ class BlogController extends Controller
         /** @var PostSearch $searchModel */
         $searchModel = Yii::createObject(PostSearch::className());
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->published();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
