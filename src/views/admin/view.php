@@ -41,8 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => $model->getAttributeLabel('status'),
                 'value' => $model->getStatusTitle(),
             ],
-            'createdAt:datetime',
-            'updatedAt:datetime',
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
 

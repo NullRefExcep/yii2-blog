@@ -11,7 +11,7 @@ use yii\helpers\Html;
  */
 ?>
 <div class="blog-item">
-    <h2><?= Html::a($model->title, ['/blog/' . $model->slug]) ?></h2>
+    <h2><?= Html::a($model->title, ['post/view' ,'slug'=> $model->slug]) ?></h2>
 
     <p><?= $model->short_text ?></p>
 </div>

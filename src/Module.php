@@ -12,8 +12,12 @@ use Yii;
  */
 class Module extends BaseModule implements IAdminModule
 {
-    public $postModel = 'nullref\blog\models\Post';
+    public $defaultRoute = 'post';
 
+    /**
+     * Allow to override module classes
+     * @var array
+     */
     public $classMap = [];
 
     /**
@@ -25,7 +29,8 @@ class Module extends BaseModule implements IAdminModule
 
     /** @var array The rules to be used in URL management. */
     public $urlRules = [
-        '<slug:[A-Za-z0-9_-]+>' => 'blog/view',
+        'post/<slug:[A-Za-z0-9_-]+>' => 'post/view',
+        'posts'=>'post/index',
     ];
 
     public static function getAdminMenu()
