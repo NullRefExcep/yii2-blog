@@ -24,7 +24,7 @@ class Bootstrap implements BootstrapInterface
         if ($app->hasModule('blog') && ($module = $app->getModule('blog')) instanceof Module) {
             $classMap = array_merge($this->classMap, $module->classMap);
             Yii::$container->setSingleton(BlogStatusList::className(), $classMap['BlogStatusList']);
-            foreach (['PostQuery', 'Post'] as $item) {
+            foreach (['PostSearch', 'PostQuery', 'Post'] as $item) {
                 $className = '\nullref\blog\models\\' . $item;
                 $postClass = $className::className();
                 $definition = $classMap[$item];
