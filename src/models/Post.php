@@ -36,11 +36,13 @@ class Post extends ActiveRecord
      */
     public function rules()
     {
+
         return [
             [['title', 'text', 'status', 'short_text'], 'required'],
             [['text', 'data', 'short_text'], 'string'],
             [['status'], 'integer'],
             [['title', 'slug'], 'string', 'max' => 255],
+            [['meta'], 'safe'],
         ];
     }
 
@@ -85,7 +87,7 @@ class Post extends ActiveRecord
 
     public static function find()
     {
-        $definition = Yii::$container->getDefinitions()[self::className()];
+        $definition = Yii::$container->getDefinitions()[__CLASS__];
         return Yii::createObject(PostQuery::className(), [$definition['class']]);
     }
 
