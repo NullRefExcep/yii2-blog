@@ -18,7 +18,8 @@
  */
 return [
     'ID' => '',
-    'Short Text' => 'Короткий текст',
+    'Meta' => 'Мета',
+    'Picture' => 'Зображення',
     'Are you sure you want to delete this item?' => 'Ви дійсно хочете видалити цей запис?',
     'Blog' => 'Блог',
     'Blog Posts' => 'Записи',
@@ -32,6 +33,7 @@ return [
     'Published' => 'Опубліковано',
     'Reset' => 'Скинути',
     'Search' => 'Пошук',
+    'Short Text' => 'Короткий текст',
     'Slug' => 'Псевдонім',
     'Status' => 'Статус',
     'Text' => 'Текст',

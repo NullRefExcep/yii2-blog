@@ -3,10 +3,13 @@
 namespace nullref\blog\models;
 
 use nullref\blog\components\BlogStatusList;
+use nullref\useful\SerializeBehavior;
 use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\StringHelper;
+use yii\web\View;
 
 /**
  * This is the model class for table "blog_post".
@@ -20,6 +23,8 @@ use yii\db\ActiveRecord;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $data
+ * @property $meta array
+ * @property $picture string
  */
 class Post extends ActiveRecord
 {
@@ -42,7 +47,7 @@ class Post extends ActiveRecord
             [['text', 'data', 'short_text'], 'string'],
             [['status'], 'integer'],
             [['title', 'slug'], 'string', 'max' => 255],
-            [['meta'], 'safe'],
+            [['meta', 'picture'], 'safe'],
         ];
     }
 
@@ -77,6 +82,10 @@ class Post extends ActiveRecord
                 'updatedAtAttribute' => 'updated_at',
                 'createdAtAttribute' => 'created_at'
             ],
+            'serialize' => [
+                'class' => SerializeBehavior::className(),
+                'fields' => ['meta'],
+            ],
             'slug' => [
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'title',
@@ -85,6 +94,10 @@ class Post extends ActiveRecord
         ]);
     }
 
+    /**
+     * @return object
+     * @throws \yii\base\InvalidConfigException
+     */
     public static function find()
     {
         $definition = Yii::$container->getDefinitions()[__CLASS__];
@@ -106,6 +119,31 @@ class Post extends ActiveRecord
             'created_at' => Yii::t('blog', 'Created At'),
             'updated_at' => Yii::t('blog', 'Updated At'),
             'data' => Yii::t('blog', 'Data'),
+            'meta' => Yii::t('blog', 'Meta'),
+            'picture' => Yii::t('blog', 'Picture'),
         ];
+    }
+
+    /**
+     * @param int $length
+     * @param string $allowableTags
+     * @return string
+     */
+    public function getTextTeaser($length = 400, $allowableTags = '<b></b><i></i><br>')
+    {
+        $withoutTags = strip_tags($this->text, $allowableTags);
+        return StringHelper::truncate($withoutTags, $length);
+    }
+
+    /**
+     * @param View $view
+     */
+    public function registerMetaTags($view)
+    {
+        if (!empty($this->meta)) {
+            foreach ($this->meta as $metaTag) {
+                $view->registerMetaTag($metaTag, $metaTag['name']);
+            }
+        }
     }
 }
