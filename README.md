@@ -55,7 +55,7 @@ class BlogStatusList extends \nullref\blog\components\BlogStatusList
     public function getList()
     {
         return array_merge(parent::getList(),[
-            \Yii::t('app','Hide'),
+            self::STATUS_HIDE => \Yii::t('app','Hide'),
         ]);
     }
 }
