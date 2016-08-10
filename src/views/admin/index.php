@@ -5,11 +5,16 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
+/* @var $selectId integer */
 /* @var $searchModel \nullref\blog\models\PostSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('blog', 'Blog Posts');
 $this->params['breadcrumbs'][] = $this->title;
+
+if ($selectId) {
+    $this->registerJs("jQuery('[data-key=$selectId]').addClass('success')");
+}
 ?>
 <div class="blog-post-index">
 
@@ -29,8 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            ['class' => 'yii\grid\CheckboxColumn'],
 
+            'id',
             'title',
             'slug',
             [
@@ -41,7 +47,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at:datetime',
             'updated_at:datetime',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{duplicate} {view} {update} {delete}',
+                'buttons' => [
+                    'duplicate' => function ($url, $model, $key) {
+                        $options = [
+                            'title' => Yii::t('blog', 'Duplicate'),
+                            'aria-label' => Yii::t('blog', 'Duplicate'),
+                            'data-pjax' => '0',
+                        ];
+                        return Html::a('<span class="glyphicon glyphicon-duplicate"></span>', $url, $options);
+                    },
+                ],
+            ],
         ],
     ]); ?>
 

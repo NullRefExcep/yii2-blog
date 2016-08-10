@@ -9,6 +9,7 @@ use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UnprocessableEntityHttpException;
 
 /**
  * AdminController implements the CRUD actions for Post model.
@@ -27,6 +28,35 @@ class AdminController extends Controller implements IAdminController
         ];
     }
 
+    public function actionDuplicate($id)
+    {
+        $model = $this->findModel($id);
+        /** @var Post $newModel */
+        $newModel = Yii::createObject(Post::className());
+        $newModel->setAttributes($model->getAttributes());
+        if ($newModel->save()) {
+            Yii::$app->session->setFlash('success', Yii::t('blog', 'Post successfully copied'), false);
+            return $this->redirect(['index', 'select_id' => $newModel->id]);
+        }
+        throw new UnprocessableEntityHttpException(implode(PHP_EOL, $newModel->getFirstErrors()));
+    }
+
+    /**
+     * Finds the Post model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Post the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Post::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
     /**
      * Lists all Post models.
      * @return mixed
@@ -36,9 +66,19 @@ class AdminController extends Controller implements IAdminController
         $searchModel = Yii::createObject(PostSearch::className());
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $selectId = Yii::$app->request->getQueryParam('select_id', 0);
+
+        /** Remove select_id from query params before rendering */
+        if ($selectId) {
+            $params = Yii::$app->request->getQueryParams();
+            unset($params['select_id']);
+            Yii::$app->request->setQueryParams($params);
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'selectId' => $selectId,
         ]);
     }
 
@@ -102,21 +142,5 @@ class AdminController extends Controller implements IAdminController
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Post model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Post the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Post::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
     }
 }

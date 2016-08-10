@@ -17,9 +17,9 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Duplicate' => '',
     'ID' => '',
-    'Meta' => 'Мета',
-    'Picture' => 'Изображение',
+    'Post successfully copied' => '',
     'Are you sure you want to delete this item?' => 'Вы уверенны что хотите удалить эту запись?',
     'Blog' => 'Блог',
     'Blog Posts' => 'Записи',
@@ -29,7 +29,9 @@ return [
     'Data' => 'Даные',
     'Delete' => 'Удалить',
     'Draft' => 'Черновик',
+    'Meta' => 'Мета',
     'N/A' => 'Не указано',
+    'Picture' => 'Изображение',
     'Published' => 'Опубликовано',
     'Reset' => 'Сброк',
     'Search' => 'Поиск',
