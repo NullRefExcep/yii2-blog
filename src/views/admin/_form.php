@@ -1,6 +1,7 @@
 <?php
 
 use mihaildev\ckeditor\CKEditor;
+use mihaildev\elfinder\ElFinder;
 use nullref\blog\models\Post;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -19,12 +20,14 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'short_text')->widget(CKEditor::className(), [
-        'editorOptions' => [
+        'editorOptions' => ElFinder::ckeditorOptions('elfinder-backend', [
             'preset' => 'basic',
-        ]
+        ])
     ]) ?>
 
-    <?= $form->field($model, 'text')->widget(CKEditor::className()) ?>
+    <?= $form->field($model, 'text')->widget(CKEditor::className(), [
+        'editorOptions' => ElFinder::ckeditorOptions('elfinder-backend'),
+    ]) ?>
 
     <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
 
