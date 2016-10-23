@@ -39,6 +39,7 @@ class Module extends BaseModule implements IAdminModule
             'label' => Yii::t('blog', 'Blog'),
             'url' => ['/blog/admin'],
             'icon' => 'archive',
+            'order' => 2,
         ];
     }
 } 
