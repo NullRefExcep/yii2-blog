@@ -9,12 +9,16 @@
         {
             "name": "Vitaly Zaremba",
             "email": "vit2zremb@gmail.com"
+        },
+        {
+            "name": "Dmytro Karpovych",
+            "email": "ZAYEC77@gmail.com"
         }
     ],
     "require": {
-        "yiisoft/yii2": "*",
-        "nullref/yii2-useful": "dev-master",
-        "nullref/yii2-core": "dev-master",
+        "yiisoft/yii2": ">=2.0.13",
+        "nullref/yii2-useful": ">=0.0.4",
+        "nullref/yii2-core": ">=0.0.3",
         "mihaildev/yii2-ckeditor": "*",
         "mihaildev/yii2-elfinder": "*"
     },
