@@ -30,21 +30,21 @@ class Bootstrap implements BootstrapInterface
                 $definition = $classMap[$item];
                 Yii::$container->set($postClass, $definition);
             }
-        }
-        if ($app instanceof WebApplication) {
-            if (!isset($app->i18n->translations['blog*'])) {
-                $app->i18n->translations['blog*'] = [
-                    'class' => PhpMessageSource::className(),
-                    'basePath' => '@nullref/blog/messages',
+            if ($app instanceof WebApplication) {
+                if (!isset($app->i18n->translations['blog*'])) {
+                    $app->i18n->translations['blog*'] = [
+                        'class' => PhpMessageSource::className(),
+                        'basePath' => '@nullref/blog/messages',
+                    ];
+                }
+
+                $configUrlRule = [
+                    'prefix' => $module->urlPrefix,
+                    'rules' => $module->urlRules,
                 ];
+
+                $app->urlManager->addRules([new GroupUrlRule($configUrlRule)], false);
             }
-
-            $configUrlRule = [
-                'prefix' => $module->urlPrefix,
-                'rules' => $module->urlRules,
-            ];
-
-            $app->urlManager->addRules([new GroupUrlRule($configUrlRule)], false);
         }
     }
 }
